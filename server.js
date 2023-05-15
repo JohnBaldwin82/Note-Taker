@@ -1,6 +1,6 @@
 const express = require('express')
-const apiRoutes = require('./routes/apiRoute')
-const htmlRoutes = require('./routes/htmlRoute')
+const apiRoute = require('./routes/apiRoute')
+const htmlRoute = require('./routes/htmlRoute')
 const app = express()
 const PORT = process.env.PORT || 3001
 
@@ -9,8 +9,8 @@ app.use(express.json())
 app.use(express.static('public'))
 
 
-app.use('/api', apiRoutes)
-app.use('/', htmlRoutes)
+app.use('/api', apiRoute)
+app.use('/', htmlRoute)
 
 app.listen(PORT, () => {
   console.log(`Now listening on this PORT ${PORT}!`)
