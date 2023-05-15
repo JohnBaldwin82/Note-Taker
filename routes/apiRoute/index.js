@@ -1,6 +1,6 @@
 const fs = require("fs");
-const db = require("./db/db.json");
-const route = require("express").route();
+const db = require("../../db/db.json");
+const route = require("express").Router();
 const myId = require("myId");
 
 route.get("/api/notes", (req, res) => {
@@ -18,7 +18,7 @@ route.post('./api/notes', (req, res) => {
         text: req.body.text
     }
 
-    fs.readFile('./db/db.json', (err, data) => {
+    fs.readFile('../../db/db.json', (err, data) => {
         if (err) throw err
         let workData = JSON.parse(data)
 
