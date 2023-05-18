@@ -1,7 +1,7 @@
 const fs = require("fs");
 const db = require("../../db/db.json");
 const route = require("express").Router();
-const myId = require("myId");
+const { v4: uuidv4 } = require('uuid');
 
 route.get("/api/notes", (req, res) => {
   fs.readFile("./db/db.json", (err, data) => {
@@ -11,21 +11,23 @@ route.get("/api/notes", (req, res) => {
   });
 });
 
-route.post('./api/notes', (req, res) => {
+route.post('/api/notes', (req, res) => {
     let workNote = {
-        id: myId(),
+        id: uuidv4(),
         title: req.body.title,
         text: req.body.text
     }
 
-    fs.readFile('../../db/db.json', (err, data) => {
+    fs.readFile('db/db.json', (err, data) => {
+        console.log('path 1')
         if (err) throw err
         let workData = JSON.parse(data)
-
+        console.log('workData: ', workData)
         workData.push(workNote)
         console.log(workData)
-
-        fs.writeFile('./db/db.json', JSON.stringify(workData), (err) => {
+        console.log('test 123')
+        fs.writeFile('db/db.json', JSON.stringify(workData), (err) => {
+            console.log('path 2')
             if (err) throw err
             res.send('This has been completed')
         })
