@@ -18,6 +18,7 @@ route.post("/api/notes", (req, res) => {
     text: req.body.text,
   };
 
+// using fs.readFile for db.json
   fs.readFile("db/db.json", (err, data) => {
     if (err) throw err;
     let workData = JSON.parse(data);
